@@ -11,4 +11,11 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    name="fetch-bibliographic-data"
+    permission="zope2.View"
+    class=".fetch.JSONBiblographyDataFetcher"
+    />
+
 </configure>

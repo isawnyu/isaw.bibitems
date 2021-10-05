@@ -1,18 +1,16 @@
-from five import grok
 from json import dumps
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 from zope.component import queryUtility
 from zExceptions import BadRequest
 from Products.CMFCore.utils import getToolByName
-from plone.app.layout.navigation.interfaces import INavigationRoot
+from Products.Five.browser import BrowserView
 from ..interfaces import IBibliographicURLIFetcher
 
 
-class JSONBiblographyDataFetcher(grok.View):
-    grok.context(INavigationRoot)
-    grok.name('fetch-bibliographic-data')
-    grok.require('zope2.View')
-
+class JSONBiblographyDataFetcher(BrowserView):
     data = None
 
     def update(self):
@@ -40,7 +38,8 @@ class JSONBiblographyDataFetcher(grok.View):
         else:
             self.data[u'plain'] = u''
 
-    def render(self):
+    def __call__(self):
+        self.update()
         res = self.request.response
         if u"error" in self.data:
             res.setStatus(500)

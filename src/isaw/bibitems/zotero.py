@@ -1,17 +1,16 @@
 import requests
-from bs4 import BeautifulSoup
-from five import grok
-from json import loads
 from pyzotero import zotero
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
+from zope.interface import implementer
 from . import logger
 from .interfaces import IBibliographicURLIFetcher
 
 
-class ZoteroWebParser(grok.GlobalUtility):
-    grok.implements(IBibliographicURLIFetcher)
-    grok.name('www.zotero.org')
-
+@implementer(IBibliographicURLIFetcher)
+class ZoteroWebParser(object):
     library_id = None
     library_type = None
     item_id = None
