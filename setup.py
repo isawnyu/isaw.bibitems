@@ -43,7 +43,7 @@ setup(name='isaw.bibitems',
           'collective.autopermission',
           'five.grok',
           'pyzotero',
-          'requests',
+          'requests[security]',
           'beautifulsoup4',
       ],
       extras_require={
