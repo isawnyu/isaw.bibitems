@@ -61,7 +61,7 @@ class ZoteroWebParser(grok.GlobalUtility):
             result[u'title'] = info['title']
             result[u'formatted_citation'] = data['formatted']
             result[u'access_uri'] = info['url']
-            result[u'bibliographic_uri'] = data['links']['alternate']['href']
+            result[u'bibliographic_uri'] = zuri or data['links']['alternate']['href']
             authors = result[u'authors'] = []
             editors = result[u'editors'] = []
             contributors = result[u'contributors'] = []
